@@ -8,7 +8,6 @@ import redis.clients.jedis.Jedis;
 
 @ElDef
 public class GeoCache {
-    private static Jedis redisConn = new Jedis("172.18.0.5", 6379);
     @ElFunction(
             prefix = "GEO",
             name = "geoCache"
@@ -18,6 +17,7 @@ public class GeoCache {
     ) {
         try {
             Gson gson = new Gson();
+            Jedis redisConn = new Jedis("172.18.0.2", 6379);
 
             String jsonPos = redisConn.get(address);
             if (!jsonPos.isEmpty()) {
@@ -40,6 +40,7 @@ public class GeoCache {
             @ElParam("longitude") double longitude
     ) {
         Gson gson = new Gson();
+        Jedis redisConn = new Jedis("localhost", 6379);
         GeoCoordinates pos = new GeoCoordinates(latitude, longitude);
         redisConn.append(address, gson.toJson(pos));
     }
