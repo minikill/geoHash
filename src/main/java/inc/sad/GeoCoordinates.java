@@ -1,5 +1,8 @@
 package inc.sad;
 
+/**
+ * POJO class of geoCoordinates
+ */
 public class GeoCoordinates {
     private Double latitude;
     private Double longitude;

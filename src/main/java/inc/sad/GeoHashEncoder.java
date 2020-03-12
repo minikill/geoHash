@@ -5,8 +5,19 @@ import com.streamsets.pipeline.api.ElDef;
 import com.streamsets.pipeline.api.ElFunction;
 import com.streamsets.pipeline.api.ElParam;
 
+/**
+ * Class for calculating geohash for gave coordinate with specified precision
+ */
 @ElDef
 public class GeoHashEncoder {
+    /**
+     * Method for calculating geohash
+     *
+     * @param latitude
+     * @param longitude
+     * @param precision - Precision of geohash aka count of letters
+     * @return
+     */
     @ElFunction(
             prefix = "GEO",
             name = "encodeGeoHash"

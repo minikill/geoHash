@@ -6,8 +6,17 @@ import com.streamsets.pipeline.api.ElFunction;
 import com.streamsets.pipeline.api.ElParam;
 import redis.clients.jedis.Jedis;
 
+/**
+ * This is class for handling and caching geopoints of hotels
+ */
+
 @ElDef
 public class GeoCache {
+    /**
+     * Method for resolving address of hotel
+     * @param address - address of hotel
+     * @return string of geopoints bordered by ";" if hotel already cached or empty string if not
+     */
     @ElFunction(
             prefix = "GEO",
             name = "geoCache"
@@ -30,6 +39,12 @@ public class GeoCache {
         return "";
     }
 
+    /**
+     * Method for saving hotel geopoints in cache DB. Data stores as JSON
+     * @param address - Address of hotel
+     * @param latitude
+     * @param longitude
+     */
     @ElFunction(
             prefix = "GEO",
             name = "addGeoCache"
