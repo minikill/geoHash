@@ -26,7 +26,7 @@ public class GeoCache {
     ) {
         try {
             Gson gson = new Gson();
-            Jedis redisConn = new Jedis("172.18.0.2", 6379);
+            Jedis redisConn = getConnection("localhost", 6379);
 
             String jsonPos = redisConn.get(address);
             if (!jsonPos.isEmpty()) {
@@ -55,8 +55,12 @@ public class GeoCache {
             @ElParam("longitude") double longitude
     ) {
         Gson gson = new Gson();
-        Jedis redisConn = new Jedis("localhost", 6379);
+        Jedis redisConn = getConnection("localhost", 6379);
         GeoCoordinates pos = new GeoCoordinates(latitude, longitude);
         redisConn.append(address, gson.toJson(pos));
+    }
+
+    public static Jedis getConnection(String host, Integer port) {
+        return new Jedis(host, port);
     }
 }
